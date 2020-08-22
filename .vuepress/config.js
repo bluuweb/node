@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Node.js',
   description: 'Node.js con bluuweb',
-  base: '/nodejs/',
+  base: '/node/',
   locales: {
     '/': {
       lang: 'es-ES'
