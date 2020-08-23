@@ -4,6 +4,8 @@ Si bien podríamos trabajar con archivos estáticos HTML, existe una manera más
 
 Entre los más populares (ejs|hbs|hjs|jade|pug|twig|vash)
 
+[https://expressjs.com/en/resources/template-engines.html](https://expressjs.com/en/resources/template-engines.html)
+
 ## Motores de plantilla
 
 [https://expressjs.com/es/guide/using-template-engines.html](https://expressjs.com/es/guide/using-template-engines.html)
