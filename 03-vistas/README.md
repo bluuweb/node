@@ -157,6 +157,7 @@ index.ejs
 Vamos a subir nuestra aplicación a un hosting real, para ello utilizaremos Heroku: [https://www.heroku.com/pricing](https://www.heroku.com/pricing)
 
 #### Crear cuenta gratis
+[https://signup.heroku.com/](https://signup.heroku.com/)
 
 #### Cambiar puerto
 ```js
@@ -164,6 +165,19 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
+```
+
+#### Agregar Script package.json
+```json
+"scripts": {
+    "start": "node app"
+  },
+```
+
+#### .gitignore
+Crear archivo ``.gitignore``
+```
+node_modules
 ```
 
 #### Heroku cli
@@ -174,6 +188,8 @@ app.listen(PORT, () => {
 
 ```
 heroku login
+git init
+heroku git:remote -a nombre-de-su-proyecto
 git add .
 git commit -am "make it better"
 git push heroku master
