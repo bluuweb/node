@@ -35,6 +35,8 @@ module.exports = {
       '/01-fundamentos/',
       '/02-servidor/',
       '/03-vistas/',
+      '/04-router/',
+      '/05-db/',
     ]
   }
 
