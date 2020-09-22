@@ -120,3 +120,38 @@ module.exports = router;
     
 <%- include("template/footer") %>
 ```
+
+## Varibles de entorno
+
+1. [https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)
+
+```
+npm install dotenv
+```
+
+2. Configurar
+```js
+require('dotenv').config()
+```
+
+3. Crear archivo ``.env``
+```
+PORT=3001
+USUARIO=xxx
+PASSWORD=xxx
+DBNAME=xxx
+```
+
+4. Llamar
+```js
+const uri = `mongodb+srv://${process.env.USUARIO}:${process.env.PASSWORD}@cluster0.ncdk5.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+```
+
+5. gitignore
+```
+node_modules
+.env
+```
+
+6. Heroku Settings: Agregar variables "Config Vars" [https://devcenter.heroku.com/articles/config-vars](https://devcenter.heroku.com/articles/config-vars)
+7. Deploy :)
