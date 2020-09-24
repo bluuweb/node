@@ -37,6 +37,7 @@ module.exports = {
       '/03-vistas/',
       '/04-router/',
       '/05-db/',
+      '/06-crud-mongo/',
     ]
   }
 
