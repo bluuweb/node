@@ -38,6 +38,7 @@ module.exports = {
       '/04-router/',
       '/05-db/',
       '/06-crud-mongo/',
+      '/20-hbs/',
     ]
   }
 
