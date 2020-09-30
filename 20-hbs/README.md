@@ -3,18 +3,16 @@
 - [https://handlebarsjs.com/](https://handlebarsjs.com/)
 
 ## HBS y Express
-
+[https://www.npmjs.com/package/hbs](https://www.npmjs.com/package/hbs)
 ```sh
-npm install handlebars
-# or
-yarn add handlebars
+npm i hbs
 ```
 
 ```js
 // Configuración inicial
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Motor de plantilla
 const hbs = require('hbs');
