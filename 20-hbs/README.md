@@ -8,6 +8,12 @@
 npm i hbs
 ```
 
+:::tip
+Existe una variante: [https://github.com/ericf/express-handlebars](https://github.com/ericf/express-handlebars) 
+
+¿Alguien sabe si es mejor?
+:::
+
 ```js
 // Configuración inicial
 const express = require("express");
