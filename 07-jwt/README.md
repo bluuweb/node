@@ -53,7 +53,7 @@ package.json
 ```json
 "scripts": {
     "dev": "nodemon index",
-    "start": "npm run index"
+    "start": "node index"
 },
 ```
 
