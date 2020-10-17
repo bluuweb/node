@@ -7,7 +7,7 @@
     <meta name="generator" content="VuePress 1.5.0">
     
     <meta name="description" content="Node.js con bluuweb">
-    <link rel="preload" href="/node/assets/css/0.styles.aa9e1715.css" as="style"><link rel="preload" href="/node/assets/js/app.b487558a.js" as="script"><link rel="preload" href="/node/assets/js/2.d8396f48.js" as="script"><link rel="preload" href="/node/assets/js/11.9d9e1874.js" as="script"><link rel="prefetch" href="/node/assets/js/10.73d420c3.js"><link rel="prefetch" href="/node/assets/js/12.a287f733.js"><link rel="prefetch" href="/node/assets/js/13.a6ce2bd6.js"><link rel="prefetch" href="/node/assets/js/3.5d4c23d2.js"><link rel="prefetch" href="/node/assets/js/4.9629e8d8.js"><link rel="prefetch" href="/node/assets/js/5.3a544b42.js"><link rel="prefetch" href="/node/assets/js/6.580426f9.js"><link rel="prefetch" href="/node/assets/js/7.cd76c2d1.js"><link rel="prefetch" href="/node/assets/js/8.3e0dc3e0.js"><link rel="prefetch" href="/node/assets/js/9.f5ce3152.js">
+    <link rel="preload" href="/node/assets/css/0.styles.aa9e1715.css" as="style"><link rel="preload" href="/node/assets/js/app.bc034b83.js" as="script"><link rel="preload" href="/node/assets/js/2.d8396f48.js" as="script"><link rel="preload" href="/node/assets/js/11.5f260bb5.js" as="script"><link rel="prefetch" href="/node/assets/js/10.69d12389.js"><link rel="prefetch" href="/node/assets/js/12.f2c60be2.js"><link rel="prefetch" href="/node/assets/js/13.1cbf8e9b.js"><link rel="prefetch" href="/node/assets/js/3.5d4c23d2.js"><link rel="prefetch" href="/node/assets/js/4.9629e8d8.js"><link rel="prefetch" href="/node/assets/js/5.3a544b42.js"><link rel="prefetch" href="/node/assets/js/6.bd20de94.js"><link rel="prefetch" href="/node/assets/js/7.7defecd7.js"><link rel="prefetch" href="/node/assets/js/8.3e0dc3e0.js"><link rel="prefetch" href="/node/assets/js/9.fa1db4fb.js">
     <link rel="stylesheet" href="/node/assets/css/0.styles.aa9e1715.css">
   </head>
   <body>
@@ -384,11 +384,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
 <span class="token comment">// route middlewares</span>
 app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/api/dashboard'</span><span class="token punctuation">,</span> verifyToken<span class="token punctuation">,</span> dashboadRoutes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre></div><ol><li>Postman: <code>http://localhost:3001/api/dashboard</code></li> <li>Headers: auth-token: agregar token</li> <li>Ver respuesta server</li></ol> <h2 id="consumir-api"><a href="#consumir-api" class="header-anchor">#</a> Consumir api</h2> <p>Queda pendiente consumir la api desde el cliente... vue.js??</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><ol><li>Postman: <code>http://localhost:3001/api/dashboard</code></li> <li>Headers: auth-token: agregar token</li> <li>Ver respuesta server</li></ol> <h2 id="consumir-api"><a href="#consumir-api" class="header-anchor">#</a> Consumir api</h2> <p>Queda pendiente consumir la api desde el cliente... vue.js??</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// cors</span>
+<span class="token keyword">const</span> cors <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'cors'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> corsOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+    origin<span class="token operator">:</span> <span class="token string">'*'</span><span class="token punctuation">,</span>
+    optionsSuccessStatus<span class="token operator">:</span> <span class="token number">200</span> <span class="token comment">// some legacy browsers (IE11, various SmartTVs) choke on 204</span>
+<span class="token punctuation">}</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">cors</span><span class="token punctuation">(</span>corsOptions<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/node/20-hbs/" class="prev">
         HBS (Motor de plantilla)
       </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
-    <script src="/node/assets/js/app.b487558a.js" defer></script><script src="/node/assets/js/2.d8396f48.js" defer></script><script src="/node/assets/js/11.9d9e1874.js" defer></script>
+    <script src="/node/assets/js/app.bc034b83.js" defer></script><script src="/node/assets/js/2.d8396f48.js" defer></script><script src="/node/assets/js/11.5f260bb5.js" defer></script>
   </body>
 </html>
