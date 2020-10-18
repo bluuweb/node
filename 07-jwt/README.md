@@ -525,6 +525,12 @@ app.use('/api/dashboard', verifyToken, dashboadRoutes);
 3. Ver respuesta server
 
 ## Consumir api
+
+::: tip CURSO EN UDEMY OFERTA!
+Aprende desde cero a trabajar con <b>Vue.js y Firebase</b> aquí: [http://curso-vue-js-udemy.bluuweb.cl](http://curso-vue-js-udemy.bluuweb.cl)
+<b>Nos vemos en clases!</b>
+:::
+
 Práctica con vue.js
 
 * Configurar CORS en API
@@ -826,3 +832,8 @@ git push heroku master
 ```
 
 Pongase una música ahora de celebración!
+
+::: tip CURSO EN UDEMY OFERTA!
+Aprende desde cero a trabajar con <b>Vue.js y Firebase</b> aquí: [http://curso-vue-js-udemy.bluuweb.cl](http://curso-vue-js-udemy.bluuweb.cl)
+<b>Nos vemos en clases!</b>
+:::
