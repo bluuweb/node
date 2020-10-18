@@ -525,14 +525,304 @@ app.use('/api/dashboard', verifyToken, dashboadRoutes);
 3. Ver respuesta server
 
 ## Consumir api
-Queda pendiente consumir la api desde el cliente... vue.js??
+Práctica con vue.js
 
+* Configurar CORS en API
 ```js
 // cors
 const cors = require('cors');
 var corsOptions = {
-    origin: '*',
+    origin: '*', // Reemplazar con dominio
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions));
 ```
+
+Despliegue a Heroku
+```sh
+heroku login
+git init //revisar puntos git en VSC
+heroku git:remote -a nombre-app-heroku
+git add .
+git commit -am "make it better"
+git push heroku master
+```
+
+Config Vars
+```sh
+USER=usuario
+PASSWORD=pass
+DBNAME=nombredB
+TOKEN_SECRET=supersecret
+```
+
+Solicitudes: (hacer pruebas en Postman)
+```sh
+POST: https://nombre.herokuapp.com/api/user/register
+POST: https://nombre.herokuapp.com/api/user/login
+```
+
+* [https://cli.vuejs.org/](https://cli.vuejs.org/)
+
+```sh
+vue create hello-world 
+```
+
+Home.vue
+```vue
+<template>
+  <div class="home">
+    <img alt="Vue logo" src="../assets/logo.png">
+    <form @submit.prevent="login(usuario)">
+      <input type="text" placeholder="Ingrese email" v-model="usuario.email">
+      <input type="password" placeholder="Ingrese contraseña" v-model="usuario.password">
+      <button type="submit">Acceder</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import {mapActions} from 'vuex'
+export default {
+  data() {
+    return {
+      usuario: {
+        email: 'prueba3@prueba.com',
+        password: '123123'
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['login'])
+  }
+}
+</script>
+```
+
+About.vue
+```vue
+<template>
+  <div class="about">
+    <h1>Ruta protegida</h1>
+  </div>
+</template>
+```
+
+Vuex
+```js
+export default createStore({
+  state: {
+    token: null
+  },
+  mutations: {
+    setToken(state, payload) {
+      state.token = payload
+    }
+  },
+  actions: {
+    async login({ commit }, usuario) {
+      try {
+        const res = await fetch('https://api-prueba-100.herokuapp.com/api/user/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(usuario)
+        })
+        const usuarioDB = await res.json()
+        console.log(usuarioDB.data.token)
+        commit('setToken', usuarioDB.data.token)
+        localStorage.setItem('token2', usuarioDB.data.token)
+      } catch (error) {
+        console.log('error: ', error)
+      }
+    },
+    obtenerToken({ commit }) {
+      if (localStorage.getItem('token')) {
+        commit('setToken', localStorage.getItem('token'))
+      } else {
+        commit('setToken', null)
+      }
+    }
+  }
+})
+```
+
+App.vue
+```vue
+<template>
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div>
+  <router-view/>
+</template>
+
+<script>
+import {mapActions} from 'vuex'
+export default {
+  methods:{
+    ...mapActions(['obtenerToken'])
+  },
+  created(){
+    this.obtenerToken()
+  }
+}
+</script>
+```
+
+Router
+```js
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../views/Home.vue'
+
+import store from '../store'
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    meta: {requireAuth: true}
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
+
+router.beforeEach((to, from, next) => {
+  const rutaProtegida = to.matched.some(record => record.meta.requireAuth);
+
+    if(rutaProtegida && store.state.token === null){
+        // ruta protegida es true
+        // token es nulo true, por ende redirigimos al inicio
+        next({name: 'Home'})
+    }else{
+        // En caso contrario sigue...
+        next()
+    }
+
+})
+
+export default router
+```
+
+About.vue
+```vue
+<template>
+  <div class="about">
+    <h1>Ruta protegida</h1>
+  </div>
+</template>
+
+<script>
+import {mapState} from 'vuex'
+export default {
+  created(){
+    this.ruta()
+  },
+  computed: {
+    ...mapState(['token'])
+  },
+  methods: {
+    async ruta(){
+      try {
+        const res = await fetch('https://api-prueba-100.herokuapp.com/api/admin', {
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': this.token
+          },
+        })
+        const resDB = await res.json()
+        console.log(resDB)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+}
+</script>
+```
+
+Cerrar Sesión
+
+Vuex
+```js
+cerrarSesion({ commit }) {
+    commit('setToken', null)
+    localStorage.removeItem('token2')
+}
+```
+
+App.vue
+```vue
+<template>
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+    <button @click="cerrarSesion">Cerrar Sesion</button>
+  </div>
+  <router-view/>
+</template>
+
+<script>
+import {mapActions} from 'vuex'
+export default {
+  methods: {
+    ...mapActions(['obtenerToken', 'cerrarSesion'])
+  },
+  created(){
+    this.obtenerToken()
+  }
+}
+</script>
+```
+
+Mensaje contraseña expuesta Google Chrome: [https://es.stackoverflow.com/questions/378912/por-qu%C3%A9-google-chrome-regresa-la-alerta-de-tu-contrase%C3%B1a-quedo-expuesta-debido](https://es.stackoverflow.com/questions/378912/por-qu%C3%A9-google-chrome-regresa-la-alerta-de-tu-contrase%C3%B1a-quedo-expuesta-debido)
+
+
+Vue + Heroku
+```sh
+npm i connect-history-api-fallback
+```
+
+index.js (server)
+```js
+// route middlewares
+app.use('/api/user', authRoutes);
+app.use('/api/admin',validaToken, admin)
+
+// app.get('/', (req, res) => {
+//     res.json({
+//         estado: true,
+//         mensaje: 'funciona!'
+//     })
+// });
+
+// Middleware para Vue.js router modo history
+const history = require('connect-history-api-fallback');
+app.use(history());
+app.use(express.static(__dirname + "/public"));
+```
+
+App vue compilar
+```sh
+npm run build
+```
+
+Pasar arhivos de "dist" a carpeta "public" del server
+
+```sh
+git add .
+git commit -m "agrengando sitio vue"
+git push heroku master
+```
+
+Pongase una música ahora de celebración!
